@@ -5,7 +5,7 @@ const Vendeur = require('../Models/VendeurModel');
 
 //_______________________  authentication________________________
 
-const signup = (req, res) =>{
+const Sellersignup = (req, res) =>{
         bcrypt.hash(req.body.password, 10, function(err,hashPassword) {
                 if(err) {
                         res.json({error : err})
@@ -18,6 +18,7 @@ const signup = (req, res) =>{
                 const login = req.body.login;
                 const password = hashPassword;
                 const identité_fiscale = req.body.identité_fiscale;
+                
 
                 const vendeur = new Vendeur ({
                         firstName,
@@ -27,7 +28,6 @@ const signup = (req, res) =>{
                         login,
                         password,
                         identité_fiscale,
-
                 });
                 vendeur
                 .save()
@@ -38,7 +38,7 @@ const signup = (req, res) =>{
 
 //____________________________________________________________________login___________________________________________________________
 
-const login = (req, res) => {
+const Sellerlogin = (req, res) => {
 
         let login = req.body.login;
         let password = req.body.password
@@ -76,5 +76,5 @@ const login = (req, res) => {
     
 
 module.exports={
-    signup, login
+        Sellersignup, Sellerlogin
 }

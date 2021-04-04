@@ -35,7 +35,7 @@ mongoose.connect('mongodb://localhost:27017/MarketPlace' , {
 const user = require('./Routers/usersRouter');
 app.use('/', user);
 const seller = require('./Routers/vendeurRouter');
-app.use('/', seller);
+app.use('/seller', seller);
 
 
 

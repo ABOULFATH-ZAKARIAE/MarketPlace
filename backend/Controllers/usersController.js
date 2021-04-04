@@ -17,6 +17,7 @@ const signUp = (req, res) =>{
                 const email = req.body.email;
                 const login = req.body.login;
                 const password = hashPassword;
+                const role = req.body.role;
                 
 
                 const user = new User ({
@@ -26,11 +27,12 @@ const signUp = (req, res) =>{
                         email,
                         login,
                         password,
+                        role
                        
                 });
                 user
                 .save()
-                .then(()=> res.json("signup"))
+                .then(()=> res.json("User added"))
                 .catch((err) => res.status(400).json("Error :" +err));
         })
 }
@@ -53,7 +55,8 @@ const login = (req, res) => {
                             if(result) {
                                     let token =jwt.sign({login: login}, 'ABOULFATHkey', (err, token) =>{
                                             res.json({
-                                             token
+                                             token,
+                                             role: users.role
                                             })
                     })
             }else {
@@ -75,12 +78,19 @@ const login = (req, res) => {
 //______________________________________________Get All Users_______________________________________________
 
 const getAllUsers = (req , res) => {
-    User.find()
+    User.find( {role: "ADMIN"})
     .then((admin) => res.json(admin))
     .catch((err) => res.status(400).json("Error :" + err));
 }
+//__________________________________________get super admin___________________________________
+
+const getSuperAdmin = (req , res) => {
+        User.find( {role: "SUPERADMIN"})
+        .then((admin) => res.json(admin))
+        .catch((err) => res.status(400).json("Error :" + err));
+    }
 
 
 module.exports={
-    signUp, login, getAllUsers
+    signUp, login, getAllUsers, getSuperAdmin
 }

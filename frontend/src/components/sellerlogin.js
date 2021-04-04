@@ -5,7 +5,7 @@
 import "toastr/build/toastr.css";
 
 
-const Login = () => {
+const SellerLogin = () => {
 	const history = useHistory();
 	const [login, setlogin] = useState();
     const [password, setPassword] = useState();
@@ -13,21 +13,16 @@ const Login = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-	const user = {login,password};
+	const vendeur = {login,password}
 
-	axios.post(`http://localhost:5000/login`, user)
+    axios.post(`http://localhost:5000/seller/login`, vendeur)
 		.then(res => {
 			console.log(res)
 			if(!res.data.message){ 
 			 let token= res.data.token;
 			 localStorage.setItem("token", token);
-			 if(res.data.role === 'SUPERADMIN'){
-				 history.push('superadmin-dashboard')
-			 }else{
-				history.push('addAdmin');
-			 }
-
-			 toastr.info('User is authenticated SuccessFully', `Welcome ${user.login}`, {
+			 history.push('/vendeur-dashboard');
+			 toastr.info('vendeur is authenticated SuccessFully', `Welcome ${vendeur.login}`, {
 				positionClass: "toast-top-left",
 			})
 
@@ -81,4 +76,4 @@ return(
 )
 
 }
- export default Login;
+ export default  SellerLogin;

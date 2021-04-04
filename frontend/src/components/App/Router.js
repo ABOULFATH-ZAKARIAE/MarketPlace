@@ -1,16 +1,22 @@
 import React from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import Login from '../login';
+import SellerLogin from '../sellerlogin';
+import superAdmin from '../dashboard/superadmin';
+import Addadmin from '../dashboard/admin-add-form';
 
-import Login from '../login'
-import superAdmin from '../Dashboard/superadmin'
+
+
 
 
 function Routes () { 
     return (
         <BrowserRouter>
         <Switch>
-            <Route path="/login" axact component={Login} />
-            <Route path="/superadmin" axact component={superAdmin} />
+            <Route path="/login" exact component={Login} />
+            <Route path="/seller/login" exact component={SellerLogin} />
+            <Route path="/superadmin-dashboard" exact component={superAdmin} />
+            <Route path="/addAdmin" exact component={Addadmin} />
         </Switch>
         </BrowserRouter>
     );

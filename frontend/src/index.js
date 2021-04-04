@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Routes from './components/App/Router'
+import Routes from './components/App/Router';
+import './index.css'
 
 
 ReactDOM.render(

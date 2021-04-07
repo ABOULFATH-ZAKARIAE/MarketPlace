@@ -18,13 +18,23 @@ const SellerLogin = () => {
     axios.post(`http://localhost:5000/seller/login`, vendeur)
 		.then(res => {
 			console.log(res)
-			if(!res.data.message){ 
+			if(!res.data.message){
+        
+        let status= res.data.status;
+
+       localStorage.setItem("status", status);
+        if(status === "Inactive"){
+          toastr.error('This Account is not activated! Yet please contact us if you have any problem')
+        }else if (status === "Block"){
+        toastr.error('This Account is Blocked! please contact us if you have any problem')
+      }else{
 			 let token= res.data.token;
 			 localStorage.setItem("token", token);
 			 history.push('/vendeur-dashboard');
 			 toastr.info('vendeur is authenticated SuccessFully', `Welcome ${vendeur.login}`, {
 				positionClass: "toast-top-left",
 			})
+    }
 
 			}else{
 				toastr.warning(res.error, 'Username Or password invalid !!!! Please Check form !', {

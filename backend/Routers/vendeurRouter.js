@@ -5,7 +5,9 @@ const vendeurController = require('../Controllers/vendeurController');
 
 router.post('/signup', vendeurController.Sellersignup);
 router.post('/login', vendeurController.Sellerlogin);
-// router.get('/',usersController.getAllUsers);
+router.get('/',vendeurController.getAllVendeur);
+router.get('/getseller/:id',vendeurController.getVendeurById);
+router.put('/update/:id',vendeurController.updateVendeur);
 
 
 

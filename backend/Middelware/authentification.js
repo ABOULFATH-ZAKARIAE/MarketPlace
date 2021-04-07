@@ -20,37 +20,37 @@ function verifyToken(req, res, next) {
     }
   }
 
-  exports.isSuperAdmin = (req, res, next) => {
-    if(req.auth.role == 0){
-        return res.status(403).json({
-            error: "Super Admin Ressource, Access Denied"
-        })
-    }else if(req.auth.role == "SUPERADMIN"){
-      return next()
-    }
+//   exports.isSuperAdmin = (req, res, next) => {
+//     if(req.auth.role == 0){
+//         return res.status(403).json({
+//             error: "Super Admin Ressource, Access Denied"
+//         })
+//     }else if(req.auth.role == "SUPERADMIN"){
+//       return next()
+//     }
 
 
-}
+// }
 
-exports.isAdmin = (req, res, next) => {
-    if(req.auth.role == 0){
-        return res.status(403).json({
-            error: "Admin Ressource, Access Denied"
-        })
-    }else if(req.auth.role == "ADMIN"){
-      return next()
-    }
-}
+// exports.isAdmin = (req, res, next) => {
+//     if(req.auth.role == 0){
+//         return res.status(403).json({
+//             error: "Admin Ressource, Access Denied"
+//         })
+//     }else if(req.auth.role == "ADMIN"){
+//       return next()
+//     }
+// }
 
-exports.isSELLER = (req, res, next) => {
-    if(req.auth.role == 0){
-        return res.status(403).json({
-            error: "SELLER Ressource, Access Denied"
-        })
-    }else if(req.auth.role == "SELLER"){
-      return next()
-    }
-}
+// exports.isSELLER = (req, res, next) => {
+//     if(req.auth.role == 0){
+//         return res.status(403).json({
+//             error: "SELLER Ressource, Access Denied"
+//         })
+//     }else if(req.auth.role == "SELLER"){
+//       return next()
+//     }
+// }
 
 
   

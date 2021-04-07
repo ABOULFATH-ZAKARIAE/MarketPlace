@@ -8,17 +8,13 @@ import axios from 'axios';
 
 
 
-const Admin = () => {
-    // const history = useHistory();
-
-    const [admins, setAdmins] = useState();
-    const [superAdmin, setSuperAdmin] = useState();
+const Vendeur = () => {
 
 
     useEffect(()=>{
 
 
-        axios.get(`http://localhost:5000/`)
+        axios.get(`http://localhost:5000/seller/getseller`)
           .then(function (response) {
     
             setAdmins(response.data)
@@ -26,28 +22,16 @@ const Admin = () => {
           }).catch(function (err) {
             console.log(err);
         });
-    
-        })
-        useEffect(()=>{
-        axios.get(`http://localhost:5000/getsuperadmin`)
-        .then(function (response) {
-  
-            setSuperAdmin(response.data)
-  
-        }).catch(function (err) {
-          console.log(err);
-      });
-  
-      })
+      
     return(
 <div className="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-gray-50 text-gray-800">
   <div className="fixed flex flex-col top-0 left-0 w-64 bg-gray-900 h-full shadow-lg">
     <div className="flex items-center pl-6 h-20 border-b border-gray-800">
-    { superAdmin && superAdmin.map(item =>(
+    { vendeur && vendeur.map(item =>(
       <div className="ml-1">
         <p className="ml-1 text-md font-medium tracking-wide truncate text-gray-100 font-sans">{item.firstName + " " + item.lastName}</p>
         <div className="badge">
-          <span className="px-2 py-1 ml-auto text-xs font-medium tracking-wide text-blue-800 bg-blue-100 rounded-full">{item.role}</span>  
+          <span className="px-2 py-1 ml-auto text-xs font-medium tracking-wide text-blue-800 bg-blue-100 rounded-full">{item.type}</span>  
         </div>  
       </div>
          ))} 
@@ -102,7 +86,7 @@ const Admin = () => {
         <table className="min-w-max w-full table-auto">
           <thead>
             <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-              <th className="py-3 px-6 text-left">Moderator</th>
+              <th className="py-3 px-6 text-left">product</th>
               <th className="py-3 px-6 text-left">Email</th>
               <th className="py-3 px-6 text-center">Phone Number</th>
               <th className="py-3 px-6 text-center">Actions</th>
@@ -158,4 +142,4 @@ const Admin = () => {
     )
 }
 
-export default Admin;
+export default Vendeur;

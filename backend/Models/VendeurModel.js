@@ -41,6 +41,12 @@ const Seller = new Schema(
                 required: true,
                 trim: true
             },
+            status: {
+              type: String,
+              required: true,
+              default: 'Inactive',
+              trim: true
+            }
         },
         {
           versionKey: false

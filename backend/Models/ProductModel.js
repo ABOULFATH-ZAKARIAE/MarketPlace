@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const Product = new Schema(
     {
-        name: {
+        title: {
             type: String,
             required: true,
             trim: true
@@ -14,12 +14,12 @@ const Product = new Schema(
             trim: true
         },
         price: {
-            type: String,
+            type: Number,
             required: true,
             trim: true
         },
         image: {
-            type: Image,
+            type: String,
             required: true,
             trim: true
         },
@@ -32,6 +32,17 @@ const Product = new Schema(
             type: String,
             required: true,
             trim: true
+        },
+        date : {
+            type : String,
+            required : true,
+            trim : true,
+        },
+        vendeur_id: {
+
         }
     }
-)
+);
+
+const product = mongoose.model("product", Product);
+module.exports = product;

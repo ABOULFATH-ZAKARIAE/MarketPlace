@@ -18,8 +18,7 @@ const Sellersignup = (req, res) =>{
                 const login = req.body.login;
                 const password = hashPassword;
                 const identité_fiscale = req.body.identité_fiscale;
-                
-
+                const status = req.body.status;
                 const vendeur = new Vendeur ({
                         firstName,
                         lastName,
@@ -28,6 +27,7 @@ const Sellersignup = (req, res) =>{
                         login,
                         password,
                         identité_fiscale,
+                        status
                 });
                 vendeur
                 .save()
@@ -53,6 +53,16 @@ const Sellerlogin = (req, res) => {
                                         })
                                 }
                                 if(result) {
+                                        if(vendeur.status == "Inactive"){
+                                                res.json({
+                                                  status: 'Inactive'
+                                                  })
+                                            }
+                                            else if(vendeur.status == "Block"){
+                                              res.json({
+                                                status: 'Block'
+                                                })
+                                          }
                                         let token =jwt.sign({login: login}, 'ABOULFATHkey', (err, token) =>{
                                                 res.json({
                                                  token
@@ -73,8 +83,47 @@ const Sellerlogin = (req, res) => {
     }).catch((err) => res.status(400).json("Error :"+ err))
     
     }
-    
+
+    //___________________________________________ALL Seller____________________
+
+    const getAllVendeur = (req , res) => {
+        Vendeur.find()
+        .then((vendeur) => res.json(vendeur))
+        .catch((err) => res.status(400).json("Error :" + err));
+    }
+//_______________________________________________________________GET SELLER BY ID__________________________________________________________________________
+
+const getVendeurById = (req, res) => {
+        Vendeur.findById(req.params.id)
+            .then(vendeur => {
+              res.status(200).json(vendeur);
+            }).catch(err => {
+                if(err.kind === 'ObjectId') {
+                    return res.status(404).send({
+                        message: "Seller not found with id " + req.params.id,
+                        error: err
+                    });                
+                }
+                return res.status(500).send({
+                    message: "Error retrieving Seller with id " + req.params.id,
+                    error: err
+                });
+            });
+      };
+//__________________________________________________________________UPDATE SELLER___________________________________________
+const updateVendeur = (req, res) => {
+        // Find Seller By ID and update it
+        Vendeur.updateOne(
+                         {_id: req.params.id},
+                          {
+                            status : req.body.status,
+                        //     type : req.body.type
+                          }
+                        )
+        .then(() => res.status(201).json("Seller updated successfully"))
+        .catch((err) => res.status(400).json("Error :" + err));
+      }; 
 
 module.exports={
-        Sellersignup, Sellerlogin
+        Sellersignup, Sellerlogin, getAllVendeur,getVendeurById,updateVendeur,getVendeurById
 }

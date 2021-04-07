@@ -37,6 +37,9 @@ app.use('/', user);
 const seller = require('./Routers/vendeurRouter');
 app.use('/seller', seller);
 
+const product = require('./Routers/productRouter');
+app.use('/seller/product', product);
+
 
 
 app.listen(port, () => {
